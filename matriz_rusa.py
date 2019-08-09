@@ -10,21 +10,15 @@ root = Tk()
 root.config(bd=15)  # borde exterior de 15 píxeles, queda mejor
 #cadre = Frame(fen, width =200, height =150, bg="light yellow")
 
-def b(numero):
-	"""Accion en el boton """
-	""" cambia coolor"""
+GRIS="#d9d9d9" #Color de fondo por defecto
+def callback(boton):
+	"""Accion sobre el boton , lo desactiva para la suma """
 	
-	print (numero)
-	
-	"""
-	print (button.cget("text"))
-	if (button.cget('bg')=='red'):
-		button.configure(bg = "green")
+	if (boton.cget('bg')=='red'):
+		boton.configure(bg = GRIS)
 	else:
-		button.configure(bg = "red")
-		
-	"""
-	return 0
+		boton.configure(bg = "red")
+
 
 def aleatorio(num=10):
 	"""genera un numero aleatorio en rango max. num"""
@@ -38,17 +32,35 @@ def creaArray():
 		linea=[]#Crea una linea vacia
 		
 		for y in range(0,5):	
-			#Genera un numero aleatorio y su validez de suma
-			linea.append([aleatorio(),aleatorio(2)])
+			#Genera numeros aleatorios, su validez para la suma, y por defecto es activo True , suma en el resultado
+			linea.append([aleatorio(),aleatorio(2),True])
 			
 		matriz5x5.append(linea)#Anade otra columna a la matriz 2d
 		
 	return matriz5x5
 
+def analisisArray(matriz):
+	"""Analiza la suma de lineas y columnas """
+	sumaLinea=0
+	ctrl=0
+	for x in range (0,5):#Recorre x las lineas
+		suma=0
+		ctrl=0
+		for y in range (0,5):#Recorre y las columnas
+			if matriz[x][y][1]==1:
+				sumaLinea+=matriz[x][y][0]
+			if matriz[x][y][2]==True:
+				ctrl+=matriz[x][y][0]				
+				
+				
+		print ("suma ",sumaLinea," , ",ctrl)
+				
+
 
 def creaJuego():
 	""" Crea matriz 5x5 etiquetas y botones """
 	matriz=creaArray() #Crea el array 5x5 con los numeros activos para suma
+	botones=[]
 
 	for lineas in matriz:
 		print (lineas) #Debug
@@ -77,16 +89,18 @@ def creaJuego():
 		
 
 	""" Genera Botones del Juego y lee la matriz"""
-	for y in range (0,5):
-		for x in range(0,5):
-			print ("Crea boton ",x,",",y)
-			#Button(root, text=str(matriz[x][y][0]), command= lambda: b((x,y))).grid(row=x+1, column=y+1)
-			Button(root, text=str(matriz[x][y][0]), command= lambda: b((x,y))).grid(row=x+1, column=y+1)
-			"""
-			boton=Button(root, text=str(matriz[x][y][0]), command= lambda: b((x,y)))
-			boton.grid(row=x+1, column=y+1)
-			"""		
+	for x in range (0,5):
+		for y in range(0,5):
 
+			botones.append(  Button(root, text=str(matriz[x][y][0]), command=lambda x=x,y=y: callback((x,y)) ) )		
+			botones[-1].grid(row=x+1, column=y+1)# Lo inserta graficamente en la rejilla
+			
+			#Configura el callback con el boton eb si mismo
+			botones[-1].configure(command= lambda boton=botones[-1]: callback(boton) ) 
+	return matriz
+	
 
-creaJuego ()
+""" crea el juego y retorna la matriz donde solo extraigo el primer campo """
+matriz=creaJuego()
+analisisArray(matriz)
 root.mainloop()
