@@ -10,7 +10,9 @@ root = Tk()
 root.config(bd=15)  # borde exterior de 15 píxeles, queda mejor
 #cadre = Frame(fen, width =200, height =150, bg="light yellow")
 
-def b():
+def b(button):
+	print ("boton")
+	button.configure(bg = "red")
 	return 0
 
 def aleatorio(num=10):
@@ -32,7 +34,8 @@ def creaArray():
 		
 	return matriz5x5
 			
-matriz=creaArray() #Crea array con los numeros
+matriz=creaArray() #Crea el array 5x5 con los numeros activos para suma
+
 for lineas in matriz:
 	print (lineas) #Debug
 
@@ -62,7 +65,7 @@ for y in range (0,5):#Recorre y las columnas
 """ Genera Botones del Juego y lee la matriz"""
 for y in range (0,5):
 	for x in range(0,5):
-		boton=Button(root, text=str(matriz[x][y][0]), command=b)
+		boton=Button(root, text=str(matriz[x][y][0]), command= lambda: b(boton))
 		boton.grid(row=x+1, column=y+1)
 
 
