@@ -6,3 +6,5 @@ aleatoria, todos los números son enteros entre 1 y 9 , el jugador debe ir quita
 algunas posiciones hasta que la sumatoria concuerde con los totales en los extremos de la matriz
 la suma de cada fila debe coincidir con los totales de fila y los totales de columna debe coincidir
 con los totales de columna.
+
+https://youtu.be/Ho_oGd_VF6k
