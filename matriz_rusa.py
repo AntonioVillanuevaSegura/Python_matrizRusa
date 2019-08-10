@@ -9,7 +9,6 @@ import random
 root = Tk()
 root.config(bd=15)  # borde exterior de 15 píxeles, queda mejor
 #cadre = Frame(fen, width =200, height =150, bg="light yellow")
-
 GRIS="#d9d9d9" #Color de fondo por defecto
 def callback(boton):
 	"""Accion sobre el boton , lo desactiva para la suma """
@@ -101,6 +100,8 @@ def creaJuego():
 	
 
 """ crea el juego y retorna la matriz donde solo extraigo el primer campo """
-matriz=creaJuego()
-analisisArray(matriz)
+
+creaJuego()
+
+
 root.mainloop()
