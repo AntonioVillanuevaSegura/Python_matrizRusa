@@ -45,7 +45,7 @@ class Juego ():
 			Button(ventanaInformativa ,text="OK",fg='red',command= lambda ventana=ventanaInformativa: self.botonFin(ventana)).pack()			
 
 	def aleatorio(self,minimo=1,maximo=10):
-		"""genera un numero aleatorio en rango max. num"""
+		"""genera un numero aleatorio en rango minimo maximo"""
 		return random.randrange(minimo,maximo)
 		
 	def creaArray(self):
